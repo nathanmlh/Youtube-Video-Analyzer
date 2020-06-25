@@ -1,0 +1,4 @@
+- googleapiclient: https://github.com/googleapis/google-api-python-client
+- google-auth: https://pypi.org/project/google-auth/
+- google-auth-oauth: https://pypi.org/project/google-auth-oauthlib/
+requests~=2.24.0
