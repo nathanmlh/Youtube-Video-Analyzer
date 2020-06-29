@@ -13,6 +13,7 @@ class YoutuberInformationGetter:
             part='contentDetails',
             forUsername=self.youtuber_name
         ).execute()
+        self.uploadsId = self.getDetails().get('items')[0]['contentDetails']['relatedPlaylists']['uploads']
 
     def getKey(self):
         """
@@ -27,6 +28,13 @@ class YoutuberInformationGetter:
         :return: The name of the youtuber
         """
         return self.youtuber_name
+
+    def getUploadsId(self):
+        """
+        Gets the uploads id for the youtube
+        :return: The uploads id
+        """
+        return self.uploadsId
 
     def getDetails(self):
         return self.youtuber_channel
