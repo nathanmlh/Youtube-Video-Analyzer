@@ -1,0 +1,6 @@
+- Information we need from YoutuberInformationGetter.py
+    - On a particular video we need this information:
+        - Comments
+        - Description
+        - Caption track
+        - Likes/dislikes
