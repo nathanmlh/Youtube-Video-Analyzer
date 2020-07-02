@@ -3,6 +3,7 @@
 # This class be able to receive a youtuber name and produce information for this youtube
 
 from googleapiclient.discovery import build
+from youtube_transcript_api import YouTubeTranscriptApi
 
 class YoutuberInformationGetter:
     def __init__(self, key, name):
@@ -78,6 +79,18 @@ class YoutuberInformationGetter:
         ).execute()
         return response['items'][0]['snippet']['title']
 
+    def getVideoDescription(self, videoId):
+        """
+        Returns a video description
+        :param videoId: The videoId we are getting the description for
+        :return: String representation of the youtube video description
+        """
+        response = self.youtube.videos().list(
+            part='snippet',
+            id=[videoId]
+        ).execute()
+        return response['items'][0]['snippet']['description']
+
     def getCommentsForVideoId(self, videoId):
         """
         Returns a list of comments related to a specified video
@@ -108,3 +121,26 @@ class YoutuberInformationGetter:
         # }
         return {'id': videoId, 'title': self.getVideoTitle(videoId),
                 'comments': self.getCommentsForVideoId(videoId)}
+
+    def getCaptions(self, videoId):
+        """
+        Returns a list of captions
+        :param videoId: The videoId we are getting the captions for
+        :return: A list of captions
+        """
+        # Format of the list:
+        # [
+        #     {
+        #         'text': 'Hey there',
+        #         'start': 7.58,
+        #         'duration': 6.13
+        #     },
+        #     {
+        #         'text': 'how are you',
+        #         'start': 14.08,
+        #         'duration': 7.58
+        #     },
+        #     # ...
+        # ]
+        return YouTubeTranscriptApi.get_transcript(videoId)
+

@@ -17,10 +17,10 @@ def main():
     info_getter = YoutuberInformationGetter.YoutuberInformationGetter(args.key, args.youtuber)
 
     if args.function == 'getUploads':
-        video_ids = info_getter.getRecentVideoIds()
-        print(video_ids)
-        print(info_getter.getVideoTitles(video_ids))
-        print(info_getter.getVideoCommentsObject(video_ids[0]))
+        recent_video_ids = info_getter.getRecentVideoIds()
+        last_video_id = recent_video_ids[0]
+        description = info_getter.getVideoDescription(last_video_id)
+        print(description)
 
 if __name__ == "__main__":
     main()
